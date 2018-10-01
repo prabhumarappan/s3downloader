@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Dozee S3 Download
+{% endblock %}
+
+{% block head %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div>
+    <ul style="list-style:none">
+        {% if files %}
+            <h3>Select Files</h3>
+        {% else %}
+            <h3>Select Folder</h3>
+        {% endif %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/download" method="POST">
+            <ul style="list-style:none">
+                <input type="text" placeholder="search" class="searchbar"/>
+                <div>
+                {% for element in datalist %}
+                    <div id="{{element}}" class="result">
+                        <li>
+                            <input type="checkbox" name="fname" value="{{ element }}">
+                            <a href="{{ element }}">{{ element }}</a>
+                            <!-- {% if element|length > 1 %}
+                                <a href="{{ element[0] }}">{{ element[0] }}</a> ||  {{ element[1] }}
+                            {% else %}
+                                <a href="{{ element[0] }}">{{ element }}</a>
+                            {% endif %} -->
+                        </li>
+                    </div>
+                {% endfor %}
+                </div>
+            </ul>
+            <div style="margin:20px">
+                <input type="submit" value="Download">
+            </div>
+        </form>
+    </ul>
+</div>
+{% endblock %}
