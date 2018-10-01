@@ -1,5 +1,11 @@
 # s3downloader
 
-To run this flask application:
+Before running this application:
+
   Input the AWS Credentials in index.py
+  
   Input the S3 container in index.py
+
+To run:
+  
+    python index.py
